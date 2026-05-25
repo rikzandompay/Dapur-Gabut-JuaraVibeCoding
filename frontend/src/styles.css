@@ -1,0 +1,200 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-display: "Archivo Black", "Space Grotesk", sans-serif;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-brutal-yellow: var(--brutal-yellow);
+  --color-brutal-pink: var(--brutal-pink);
+  --color-brutal-lime: var(--brutal-lime);
+  --color-brutal-blue: var(--brutal-blue);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --shadow-brutal: 6px 6px 0 0 oklch(0 0 0);
+  --shadow-brutal-sm: 3px 3px 0 0 oklch(0 0 0);
+  --shadow-brutal-lg: 10px 10px 0 0 oklch(0 0 0);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  --background: oklch(1 0 0);
+  --foreground: oklch(0 0 0);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+
+  --primary: oklch(0 0 0);
+  --primary-foreground: oklch(1 0 0);
+
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0 0 0);
+
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.35 0 0);
+
+  --accent: oklch(0.92 0.18 95);
+  --accent-foreground: oklch(0 0 0);
+
+  --brutal-yellow: oklch(0.92 0.19 95);
+  --brutal-pink: oklch(0.78 0.18 5);
+  --brutal-lime: oklch(0.88 0.22 130);
+  --brutal-blue: oklch(0.78 0.15 240);
+
+  --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0 0 0);
+  --input: oklch(1 0 0);
+  --ring: oklch(0 0 0);
+}
+
+.dark {
+  --background: oklch(0.15 0 0);
+  --foreground: oklch(1 0 0);
+  --card: oklch(0.2 0 0);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.2 0 0);
+  --popover-foreground: oklch(1 0 0);
+  --primary: oklch(1 0 0);
+  --primary-foreground: oklch(0 0 0);
+  --secondary: oklch(0.25 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.25 0 0);
+  --muted-foreground: oklch(0.7 0 0);
+  --accent: oklch(0.92 0.19 95);
+  --accent-foreground: oklch(0 0 0);
+  --border: oklch(1 0 0);
+  --input: oklch(0.2 0 0);
+  --ring: oklch(1 0 0);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    background-image:
+      linear-gradient(to right, oklch(0 0 0 / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0 0 0 / 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: none;
+  }
+}
+
+@utility brutal-border {
+  border: 3px solid var(--foreground);
+}
+
+@utility brutal-shadow {
+  box-shadow: var(--shadow-brutal);
+}
+
+@utility brutal-shadow-sm {
+  box-shadow: var(--shadow-brutal-sm);
+}
+
+@utility brutal-shadow-lg {
+  box-shadow: var(--shadow-brutal-lg);
+}
+
+@utility brutal-card {
+  border: 3px solid var(--foreground);
+  box-shadow: var(--shadow-brutal);
+  background: var(--card);
+}
+
+@utility brutal-hover {
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+/* ─── Lenis Smooth Scroll ──────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ─── Custom Scrollbar ─────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+  border-left: 3px solid var(--foreground);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--foreground);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brutal-pink);
+}
+
+/* ─── Selection Color ──────────────────────────────── */
+::selection {
+  background: var(--brutal-yellow);
+  color: var(--foreground);
+}

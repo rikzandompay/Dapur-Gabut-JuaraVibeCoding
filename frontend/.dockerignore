@@ -1,0 +1,14 @@
+node_modules
+.next
+.output
+.vinxi
+dist
+build
+out
+.env
+.env.*.local
+.git
+.vercel
+Dockerfile
+docker-compose.yml
+README.md
