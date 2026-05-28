@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -118,11 +119,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const location = useLocation();
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
 
   return (
     <QueryClientProvider client={queryClient}>
       <SmoothScroll>
-        <Navbar />
+        {!isAuthPage && <Navbar />}
         <PageTransition>
           <Outlet />
         </PageTransition>

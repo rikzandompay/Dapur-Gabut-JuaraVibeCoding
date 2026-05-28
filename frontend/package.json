@@ -8,6 +8,7 @@
     "build": "vite build",
     "postbuild": "node -e \"const fs=require('fs');if(fs.existsSync('dist/client')&&!fs.existsSync('dist/client/index.html')){fs.copyFileSync('index.html','dist/client/index.html');console.log('✓ index.html copied to dist/client/')}\"",
     "build:dev": "vite build --mode development",
+    "start": "bun server.js",
     "preview": "vite preview",
     "lint": "eslint .",
     "format": "prettier --write ."

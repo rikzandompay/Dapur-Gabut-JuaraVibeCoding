@@ -58,12 +58,12 @@ function Login() {
       <div className="w-full max-w-md">
         {/* Logo & Header */}
         <div className="text-center">
-          <Link to="/" className="inline-flex items-center gap-3">
+          <div className="inline-flex items-center gap-3">
             <span className="flex h-14 w-14 items-center justify-center border-[3px] border-foreground bg-brutal-yellow brutal-shadow">
               <ChefHat className="h-7 w-7 text-foreground" strokeWidth={2.5} />
             </span>
             <span className="font-display text-3xl tracking-tight">DAPURGABUT</span>
-          </Link>
+          </div>
           <h1 className="mt-6 font-display text-4xl leading-tight md:text-5xl">
             MASUK KE <span className="bg-brutal-pink px-2">DAPURMU</span>
           </h1>
@@ -178,22 +178,6 @@ function Login() {
               )}
             </button>
           </form>
-        </div>
-
-        {/* Dummy Users Info */}
-        <div className="mt-6 brutal-card bg-brutal-blue/30 p-4">
-          <p className="text-center text-xs font-bold uppercase tracking-wider mb-3">Akun Demo</p>
-          <div className="space-y-2 text-sm font-medium">
-            <div className="flex items-center justify-between border-[3px] border-foreground bg-background px-3 py-2">
-              <span className="font-bold">Chef Rikzan</span>
-              <span className="text-muted-foreground">rikzan@dapurgabut.com</span>
-            </div>
-            <div className="flex items-center justify-between border-[3px] border-foreground bg-background px-3 py-2">
-              <span className="font-bold">Dapur Gabut</span>
-              <span className="text-muted-foreground">gabut@dapurgabut.com</span>
-            </div>
-            <p className="text-center text-xs text-muted-foreground">Password: <span className="font-bold text-foreground">password</span></p>
-          </div>
         </div>
 
         {/* Footer */}

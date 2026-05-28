@@ -12,7 +12,6 @@ RUN bun install --frozen-lockfile
 FROM base AS builder
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-# (Penting untuk Next.js: pastikan `output: "standalone"` ada di next.config.mjs Anda)
 RUN bun run build
 
 # Tahap 3: Production Runner (Image paling ringan)
@@ -21,34 +20,18 @@ ENV NODE_ENV=production
 ENV PORT=8080
 ENV HOSTNAME="0.0.0.0"
 
-# Keamanan tambahan: Buat non-root user
-RUN addgroup --system --gid 1001 bunjs
-RUN adduser --system --uid 1001 nextjs
+# Salin folder dist hasil build dan file server
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/server.js ./server.js
 
-COPY --from=builder /app/public ./public
+# PENTING: Salin node_modules agar server bisa berjalan
+COPY --from=builder /app/node_modules ./node_modules
 
-# Setup permission untuk Next.js
-RUN mkdir .next
-RUN chown nextjs:bunjs .next
-
-# Copy hasil build standalone Next.js
-# (Ini membuat ukuran docker image sangat kecil karena hanya membawa file yang dibutuhkan)
-COPY --from=builder --chown=nextjs:bunjs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:bunjs /app/.next/static ./.next/static
-
-# Switch ke user non-root
-USER nextjs
+# Gunakan user non-root 'bun' bawaan dari image oven/bun
+USER bun
 
 EXPOSE 8080
 
-# Jalankan server Next.js standalone menggunakan Bun
-CMD ["bun", "server.js"]
-
-# ---------------------------------------------------------
-# CATATAN: Jika Anda BELUM bermigrasi ke Next.js dan 
-# masih menggunakan TanStack Start (seperti di kode Anda saat ini), 
-# gunakan konfigurasi COPY & CMD di bawah ini sebagai gantinya:
-#
-# COPY --from=builder --chown=nextjs:bunjs /app/.output ./.output
-# CMD ["bun", ".output/server/index.mjs"]
-# ---------------------------------------------------------
+# Jalankan server menggunakan script start yang sudah disiapkan
+CMD ["bun", "run", "start"]

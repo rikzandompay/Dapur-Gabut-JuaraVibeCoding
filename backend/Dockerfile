@@ -40,8 +40,7 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # 10. Optimize Laravel
-RUN php artisan config:cache && \
-    php artisan route:cache && \
+RUN php artisan route:cache && \
     php artisan view:cache
 
 # 11. Expose port 8080
