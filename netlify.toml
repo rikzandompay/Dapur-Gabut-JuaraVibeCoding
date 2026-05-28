@@ -1,0 +1,9 @@
+[build]
+  base = "frontend"
+  command = "npm install && npx vite build -c vite.config.netlify.ts"
+  publish = "dist/netlify"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
