@@ -5,11 +5,8 @@ import {
   createRootRouteWithContext,
   useRouter,
   useLocation,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { Navbar } from "@/components/Navbar";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { PageTransition } from "@/components/PageTransition";
@@ -72,50 +69,10 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 }
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(  {
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DapurGabut — Pembuat Resep Cerdas" },
-      { name: "description", content: "Temukan resep elegan dari bahan yang Anda miliki." },
-      { property: "og:title", content: "DapurGabut — Pembuat Resep Cerdas" },
-      { name: "twitter:title", content: "DapurGabut — Pembuat Resep Cerdas" },
-      { property: "og:description", content: "Temukan resep elegan dari bahan yang Anda miliki." },
-      { name: "twitter:description", content: "Temukan resep elegan dari bahan yang Anda miliki." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3b1d1b09-6815-462e-a5f3-4b9ff5b78c54/id-preview-4fd58dd6--f9b043d9-8841-4f27-af86-e880e99fbaa1.lovable.app-1779557074817.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3b1d1b09-6815-462e-a5f3-4b9ff5b78c54/id-preview-4fd58dd6--f9b043d9-8841-4f27-af86-e880e99fbaa1.lovable.app-1779557074817.png" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { property: "og:type", content: "website" },
-    ],
-    links: [
-      { rel: "stylesheet", href: appCss },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap",
-      },
-    ],
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="id">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
