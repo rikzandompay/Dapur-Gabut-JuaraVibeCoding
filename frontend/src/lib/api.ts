@@ -2,7 +2,14 @@
  * API client for communicating with the Laravel backend.
  */
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+const PRODUCTION_API_URL = 'https://dapurgabut.helipod.app/api';
+const DEV_API_URL = 'http://localhost:8000/api';
+
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL ||
+  (typeof window !== 'undefined' && window.location.hostname !== 'localhost'
+    ? PRODUCTION_API_URL
+    : DEV_API_URL);
 
 // ── Types ──────────────────────────────────────────────
 
